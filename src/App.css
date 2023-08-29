@@ -1,6 +1,62 @@
-.container {
-    margin-top: 50px;
+:root {
+    --font-color-grey: #686868;
+    --font-color-dgrey: #202124;
+}
+
+h1 {
+    color: var(--font-color-grey);
+    font-size: 36px;
+    font-weight: 300;
+    margin-top: 20px;
+    line-height: 30px;
+}
+
+li {
+    list-style: none;
+    font-size: 16px;
+    line-height: 19px;
+}
+
+a {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+.description ul {
+    margin: 0;
+    padding: 0;
+}
+
+.weather {
     padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0.177);
     border-radius: 5px;
+}
+
+img {
+    
+}
+
+.temperature {
+    font-size: 64px;
+    line-height: 64px;
+}
+
+.container {
+    max-width: 550px;
+    margin-top: 50px;
+    color: var(--font-color-dgrey);
+}
+
+.search {
+    flex: 1 1 200px;
+  }
+
+footer {
+    font-size: 12px;
+    color: var(--font-color-grey);
+    text-align: center;
 }

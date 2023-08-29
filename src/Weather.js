@@ -5,8 +5,14 @@ import './App.css';
 export default function Weather () {
     const [ready, setReady] = useState(false);
     const [temperature, setTemperature] = useState(null);
+    const [weatherData, setWeatherData] = useState({});
     function handleResponse(response) {
         console.log(response.data);
+        setWeatherData({
+            temperature: response.data.main.temp,
+            wind: response.data.wind.speed,
+            city: response.data.name,
+        })
         setTemperature(Math.round(response.data.main.temp));
         setReady(true);
     }
@@ -22,10 +28,10 @@ export default function Weather () {
                 </form>
             
               <div className='description'>
-                <h1>{city}</h1>
+                <h1>{weatherData.city}</h1>
                 <ul>
                   <li>Wednesday 07:00</li>
-                  <li>Mostly sunny</li>
+                  <li>{weatherData.description}</li>
                 </ul>
               </div>
     

@@ -14,7 +14,7 @@ export default function Weather () {
             humidity: response.data.main.humidity,
             wind: response.data.wind.speed,
             city: response.data.name,
-            icon: response.data.weather[0].icon,
+            icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
         })
         setTemperature(Math.round(response.data.main.temp));
         setReady(true);
@@ -34,16 +34,16 @@ export default function Weather () {
                 <h1>{weatherData.city}</h1>
                 <ul>
                   <li>Wednesday 07:00</li>
-                  <li>{weatherData.description}</li>
+                  <li className="text-capitalize">{weatherData.description}</li>
                 </ul>
               </div>
     
               <div className='row'>
-                <div className='col'>
-                  <img src='https://ssl.gstatic.com/onebox/weather/64/partly_cloudy.png' alt="moustly sunny"/>
+                <div className='col col-temp'>
+                  <img className="icon" src={weatherData.icon} alt={weatherData.description}/>
                   <span className='temperature'>{temperature}</span>°C
                 </div>
-                <div className='col'>
+                <div className='col col-wind'>
                   <ul>
                     <li>Precipitation: 15%</li>
                     <li>Humidity: {weatherData.humidity}%</li>

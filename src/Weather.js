@@ -10,8 +10,11 @@ export default function Weather () {
         console.log(response.data);
         setWeatherData({
             temperature: response.data.main.temp,
+            description: response.data.weather[0].description,
+            humidity: response.data.main.humidity,
             wind: response.data.wind.speed,
             city: response.data.name,
+            icon: response.data.weather[0].icon,
         })
         setTemperature(Math.round(response.data.main.temp));
         setReady(true);
@@ -43,8 +46,8 @@ export default function Weather () {
                 <div className='col'>
                   <ul>
                     <li>Precipitation: 15%</li>
-                    <li>Humidity: 72%</li>
-                    <li>Wind: 2 km/h</li>
+                    <li>Humidity: {weatherData.humidity}%</li>
+                    <li>Wind: {weatherData.wind} km/h</li>
                   </ul>
                 </div>
               </div>
@@ -53,7 +56,7 @@ export default function Weather () {
         )
     } else {
         const apiKey = "1a6432c5ca7b6f9b0bee45c98d54ea71";
-        let city = "Barcelona";
+        let city = "New York";
         const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
         axios.get(apiUrl).then(handleResponse);
     }

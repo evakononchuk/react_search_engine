@@ -36,9 +36,16 @@ a:hover {
     border-radius: 5px;
 }
 
+.weather img {
+    width: 64px;
+    height: 64px;
+    float: left;
+}
+
 .temperature {
     font-size: 64px;
     line-height: 64px;
+    font-weight: 400;
 }
 
 .container {
@@ -51,19 +58,8 @@ a:hover {
     flex: 1 1 200px;
   }
 
-.icon {
-    width: 64px;
-    height: 64px;
-}
-
-.col-temp, .col-wind {
-    display: inline-block;
-    vertical-align: top;
-    width: 50%;
-}
-
 footer {
     font-size: 12px;
     color: var(--font-color-grey);
-    text-align: center;
+    margin: 10px 0;
 }

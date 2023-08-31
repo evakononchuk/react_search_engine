@@ -2,13 +2,14 @@ import React, { useState } from "react";
 import axios from 'axios';
 import './App.css';
 
-export default function Weather () {
-    const [ready, setReady] = useState(false);
+export default function Weather (props) {
+    //const [ready, setReady] = useState(false);
     const [temperature, setTemperature] = useState(null);
-    const [weatherData, setWeatherData] = useState({});
+    const [weatherData, setWeatherData] = useState({ready: false});
     function handleResponse(response) {
         console.log(response.data);
         setWeatherData({
+            ready: true,
             temperature: response.data.main.temp,
             description: response.data.weather[0].description,
             humidity: response.data.main.humidity,
@@ -17,10 +18,9 @@ export default function Weather () {
             icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
         })
         setTemperature(Math.round(response.data.main.temp));
-        setReady(true);
     }
 
-    if (ready) {
+    if (weatherData.ready) {
         return (
             <div className='weather'>
               <form>
@@ -39,11 +39,16 @@ export default function Weather () {
               </div>
     
               <div className='row'>
-                <div className='col col-temp'>
-                  <img className="icon" src={weatherData.icon} alt={weatherData.description}/>
-                  <span className='temperature'>{temperature}</span>°C
+                <div className='col'>
+                    <div className="clearfix">
+                        <img src={weatherData.icon} alt={weatherData.description}/>
+                        <div>
+                            <span className='temperature'>{temperature}</span>
+                            <span className='unit'>°C</span>
+                        </div>
+                    </div>
                 </div>
-                <div className='col col-wind'>
+                <div className='col'>
                   <ul>
                     <li>Precipitation: 15%</li>
                     <li>Humidity: {weatherData.humidity}%</li>
@@ -56,11 +61,9 @@ export default function Weather () {
         )
     } else {
         const apiKey = "1a6432c5ca7b6f9b0bee45c98d54ea71";
-        let city = "New York";
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
         axios.get(apiUrl).then(handleResponse);
-    }
 
-    
-    
+        return "Loading...";
+    }
 }

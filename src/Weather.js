@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import axios from 'axios';
+import WeatherInfo from "./WeatherInfo";
 import './App.css';
-import FormattedDate from "./FormattedDate";
 
 export default function Weather (props) {
     //const [ready, setReady] = useState(false);
-    const [temperature, setTemperature] = useState(null);
     const [weatherData, setWeatherData] = useState({ready: false});
     function handleResponse(response) {
         console.log(response.data);
@@ -19,7 +18,6 @@ export default function Weather (props) {
             city: response.data.name,
             icon: `https://openweathermap.org/img/wn/${response.data.weather[0].icon}@2x.png`,
         })
-        setTemperature(Math.round(response.data.main.temp));
     }
 
     if (weatherData.ready) {
@@ -31,33 +29,8 @@ export default function Weather (props) {
                 <div className='col-3'><input type="submit" value="Search" className='btn btn-primary'/></div>
                 </div>
                 </form>
-            
-              <div className='description'>
-                <h1>{weatherData.city}</h1>
-                <ul>
-                  <li><FormattedDate date = {weatherData.date} /></li>
-                  <li className="text-capitalize">{weatherData.description}</li>
-                </ul>
-              </div>
-    
-              <div className='row'>
-                <div className='col'>
-                    <div className="clearfix">
-                        <img src={weatherData.icon} alt={weatherData.description}/>
-                        <div>
-                            <span className='temperature'>{temperature}</span>
-                            <span className='unit'>°C</span>
-                        </div>
-                    </div>
-                </div>
-                <div className='col'>
-                  <ul>
-                    <li>Precipitation: 15%</li>
-                    <li>Humidity: {weatherData.humidity}%</li>
-                    <li>Wind: {weatherData.wind} km/h</li>
-                  </ul>
-                </div>
-              </div>
+
+                <WeatherInfo data={weatherData}/>
             
           </div>
         )

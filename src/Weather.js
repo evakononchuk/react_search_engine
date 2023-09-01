@@ -6,8 +6,9 @@ import './App.css';
 export default function Weather (props) {
     //const [ready, setReady] = useState(false);
     const [weatherData, setWeatherData] = useState({ready: false});
+    //const [temperature, setTemperature] = useState(null);
+    const [city, setCity] = useState(props.defaultCity);
     function handleResponse(response) {
-        console.log(response.data);
         setWeatherData({
             ready: true,
             date: new Date(response.data.dt * 1000),
@@ -20,12 +21,27 @@ export default function Weather (props) {
         })
     }
 
+    function handleCityChange(event) {
+        setCity(event.target.value);
+    }
+
+    function search() {
+        const apiKey = "1a6432c5ca7b6f9b0bee45c98d54ea71";
+        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${apiKey}&units=metric`;
+        axios.get(apiUrl).then(handleResponse);
+    }
+
+    function handleSubmit(event) {
+        event.preventDefault();
+        search();
+    }
+
     if (weatherData.ready) {
         return (
             <div className='weather'>
-              <form>
+              <form onSubmit={handleSubmit}>
               <div className='row'>
-                <div className='col-9 search'><input type="search" placeholder='Enter the city...' className='form-control'/></div>
+                <div className='col-9 search'><input onChange={handleCityChange} type="search" placeholder='Enter the city...' className='form-control' autoFocus="on"/></div>
                 <div className='col-3'><input type="submit" value="Search" className='btn btn-primary'/></div>
                 </div>
                 </form>
@@ -33,12 +49,9 @@ export default function Weather (props) {
                 <WeatherInfo data={weatherData}/>
             
           </div>
-        )
+        );
     } else {
-        const apiKey = "1a6432c5ca7b6f9b0bee45c98d54ea71";
-        const apiUrl = `https://api.openweathermap.org/data/2.5/weather?q=${props.defaultCity}&appid=${apiKey}&units=metric`;
-        axios.get(apiUrl).then(handleResponse);
-
+        search();
         return "Loading...";
     }
 }

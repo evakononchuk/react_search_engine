@@ -6,18 +6,10 @@ import WeatherForecastDay from "./WeatherForecastDay";
 export default function WeatherForecast(props) {
     const [loaded, setLoaded] = useState(false);
     const [forecast, setForecast] = useState(null);
-    console.log(props.coordinates);
-    function handleResponse(response) {
-        console.log(response.data);
-        setForecast(response.data.daily);
-        setLoaded(true);
-    }
-    //console.log(props);
-
-    
 
     if(loaded) {
-        console.log(forecast);
+        //console.log(forecast);
+        console.log(props.coordinates.lat);
         return (
             <div className="WeatherForecast">
                 <div className="row">
@@ -28,14 +20,22 @@ export default function WeatherForecast(props) {
             </div>
         )
     } else {
-        let apiKey = 'c8a77112b2faf6684bb4b21a0aa778ae';
+        let apiKey = "ad793a6d772939c31783de5822791acf";
         let longitude = props.coordinates.lon;
         let latitude = props.coordinates.lat;
-        let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
-    
+        let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${latitude}&lon=${longitude}&appid=${apiKey}&units=metric`;
+
         axios.get(apiUrl).then(handleResponse);
 
-    return null;
+        return null;
     }
+    
+    function handleResponse(response) {
+        //console.log(response.data);
+        setForecast(response.data.daily);
+        setLoaded(true);
+    }
+
+    
     
 }

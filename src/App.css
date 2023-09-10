@@ -36,9 +36,9 @@ a:hover {
     border-radius: 5px;
 }
 
-.weather img {
-    width: 100px;
-    height: 100px;
+.weather canvas {
+    margin-top: 20px;
+    margin-right: 10px;
     display: inline-block;
     vertical-align: top;
 }

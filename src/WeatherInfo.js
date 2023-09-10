@@ -20,11 +20,10 @@ export default function WeatherInfo(props) {
               <div className='row'>
                 <div className='col'>
                     <div className="clearfix">
-                      <WeatherIcon code={props.data.icon} />
                       <div>
-                        <img src={props.data.icon} alt={props.data.description}/>
-                          <WeatherTemperature celsius={props.data.temperature}/>
-                          <WeatherForecast data={props.data.icon}/>
+                        <WeatherIcon code={props.data.icon} />
+                        <WeatherTemperature celsius={props.data.temperature}/>
+                        <WeatherForecast data={props.data.icon}/>
                       </div>
                     </div>
                 </div>

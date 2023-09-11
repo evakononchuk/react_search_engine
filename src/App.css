@@ -25,18 +25,30 @@ a:hover {
     text-decoration: underline;
 }
 
+.container {
+    max-width: 550px;
+    height: auto;
+    margin-top: 50px;
+    color: var(--font-color-dgrey);
+}
+
 .description ul {
     margin: 0;
     padding: 0;
+}
+
+.humidity-wind ul {
+    margin-top:  30px;
 }
 
 .weather {
     padding: 20px;
     border: 1px solid rgba(0, 0, 0, 0.177);
     border-radius: 5px;
+    height: 350px;
 }
 
-.weather canvas {
+.weather-icon-temp canvas {
     margin-top: 20px;
     margin-right: 10px;
     display: inline-block;
@@ -61,12 +73,6 @@ a:hover {
 
 .unit-temp {
     display: inline-block;
-}
-
-.container {
-    max-width: 550px;
-    margin-top: 50px;
-    color: var(--font-color-dgrey);
 }
 
 .search {

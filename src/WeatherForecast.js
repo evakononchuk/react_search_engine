@@ -23,8 +23,8 @@ export default function WeatherForecast(props) {
                     {forecast.map(function(dailyForecast, index) {
                         if (index < 5) {
                             return (
-                                <div className="col sm-icon" key={index}>
-                                    <WeatherForecastDay data={dailyForecast} />
+                                <div className="col forecast-day" key={index}>
+                                   <WeatherForecastDay data={dailyForecast} />
                                 </div>
                             );
                         } else {

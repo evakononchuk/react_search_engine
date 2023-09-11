@@ -2,7 +2,16 @@
     text-align: center;
 }
 
-.WeatherForecast .forecast-icon {
+.forecast-day {
     width: 20px;
     height: 20px;
+    font-size: 14px;
+}
+
+.forecast-max-temp {
+    margin-left: 5px;
+}
+
+.forecast-day canvas {
+    margin-top: 10px;
 }
